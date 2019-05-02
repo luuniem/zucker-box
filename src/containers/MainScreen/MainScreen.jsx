@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import LightSwitch from "./../../components/LightSwitch/LightSwitch";
-import Switches from "./../Switches/Switches";
+import ColorSlider from "./../ColorSlider/ColorSlider";
 
 const username = "efhX0bOeYSyCShCbb7maUfdZd-80624DviBfbXZh";
 const api_link = "https://192.168.1.106/api/";
@@ -50,6 +50,7 @@ class MainScreen extends PureComponent {
           lightSwitch={switchLightHandler}
           lightSwitchOff={switchOffHandler}
         />
+        <ColorSlider />
       </div>
     );
   }
