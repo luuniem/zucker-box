@@ -1,8 +1,6 @@
 import React, { PureComponent } from "react";
 import LightSwitch from "./../../components/LightSwitch/LightSwitch";
 import ColorSlider from "./../ColorSlider/ColorSlider";
-import ColorButton from "./../../components/ColorButton/ColorButton";
-
 import Axios from "axios";
 
 const username = "efhX0bOeYSyCShCbb7maUfdZd-80624DviBfbXZh";
@@ -51,7 +49,6 @@ class MainScreen extends PureComponent {
         <ColorSlider />
 
         <h3>CHOOSE COLOR</h3>
-        <ColorButton>White</ColorButton>
       </div>
     );
   }
