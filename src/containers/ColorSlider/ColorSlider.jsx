@@ -23,44 +23,25 @@ class ColorSlider extends PureComponent {
   slideHandler = async e => {
     this.setState({ hue: e.target.value });
     console.log(this.state.hue);
-    await Axios.put(`${api_link}${username}/lights/4/state`, {
+    await Axios.put(`${api_link}${username}/lights/10/state`, {
       hue: Number(this.state.hue)
     }).then(response => {
       console.log(response);
     });
   };
 
-  //   componentWillUnmount = () => {
-  //     this.slideHandler.cancel();
-  //   };
-  //   slideHandler = e => {
-  //     this.setState({ hue: e.target.value });
-  //     console.log(this.state.hue);
-  //   };
-
-  //   async componentDidMount() {
-  //     await Axios.put(`${api_link}${username}/lights/4/state`, {
-  //       hue: Number(this.state.hue)
-  //     }).then(response => {
-  //       console.log(response);
-  //     });
-  //   }
-
   render() {
     const { slideHandler } = this;
-    const { hue } = this.state;
+    // const { hue } = this.state;
     return (
       <div className="slide-container">
-        <h3>SLIDE TO CHANGE COLOR</h3>
-        <p>{hue}</p>
         <input
           type="range"
           min="0"
           max="65535"
           className="slider"
           id="myRange"
-          //   onChange={e => slideHandler(e.target.value)}
-          onChange={this.debounceEvent(slideHandler, 500)}
+          onChange={this.debounceEvent(slideHandler, 200)}
         />
       </div>
     );

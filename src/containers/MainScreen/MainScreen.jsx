@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
-import LightSwitch from "./../../components/LightSwitch/LightSwitch";
+import Lights from "../../components/Lights/Lights";
 import ColorSlider from "./../ColorSlider/ColorSlider";
 import Axios from "axios";
+import "./MainScreen.scss";
 
 const username = "efhX0bOeYSyCShCbb7maUfdZd-80624DviBfbXZh";
 const api_link = "https://192.168.1.106/api/";
@@ -10,40 +11,68 @@ class MainScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      lightData: [],
-      state: []
+      lights: []
+      // togglePc: null,
+      // toggleTest: null,
+      // toggleBedLeft: null
     };
   }
 
-  componentDidMount() {
-    Axios.get(`${api_link}${username}/lights/4`, "state").then(res => {
-      console.log(res);
+  // async componentDidMount(e) {
+  //   Axios.get(`${api_link}${username}/groups/1`).then(res => {
+  //     console.log(res);
+  //   });
+
+  //   this.setState({ toggleOn: this.state.toggleOn });
+  //   Axios.put(`${api_link}${username}/groups/1/state`, {
+  //     all_on: true
+  //   });
+  // }
+
+  triggerPCHandler(e) {
+    this.setState({ togglePc: !this.state.togglePc });
+    Axios.put(`${api_link}${username}/lights/4/state`, {
+      on: !this.state.togglePc
     });
   }
 
-  async switchLightHandler() {
-    await Axios.put(`${api_link}${username}/lights/4/state`, {
-      on: true
-    }).then(res => {
-      console.log(res);
+  triggerTestHandler(e) {
+    this.setState({ toggleTest: !this.state.toggleTest });
+    Axios.put(`${api_link}${username}/lights/10/state`, {
+      on: !this.state.toggleTest
     });
   }
-
-  async switchOffHandler() {
-    await Axios.put(`${api_link}${username}/lights/4/state`, {
-      on: false
+  triggerBedLeftHandler(e) {
+    this.setState({ toggleBedLeft: !this.state.toggleBedLeft });
+    Axios.put(`${api_link}${username}/lights/5/state`, {
+      on: !this.state.toggleBedLeft
+    });
+  }
+  triggerBedRightHandler(e) {
+    this.setState({ toggleBedRight: !this.state.toggleBedRight });
+    Axios.put(`${api_link}${username}/lights/9/state`, {
+      on: !this.state.toggleBedRight
     });
   }
 
   render() {
-    const { switchLightHandler, switchOffHandler } = this;
+    const {
+      triggerPCHandler,
+      triggerTestHandler,
+      triggerBedLeftHandler,
+      triggerBedRightHandler
+      // triggerTest2Handler
+    } = this;
 
     return (
       <div>
-        <LightSwitch
+        <Lights
           className="primary-color"
-          lightSwitch={switchLightHandler}
-          lightSwitchOff={switchOffHandler}
+          triggerPC={triggerPCHandler.bind(this)}
+          triggerTest={triggerTestHandler.bind(this)}
+          triggerBedLeft={triggerBedLeftHandler.bind(this)}
+          triggerBedRight={triggerBedRightHandler.bind(this)}
+          // triggerTest2={triggerTest2Handler.bind(this)}
         />
 
         <ColorSlider />
