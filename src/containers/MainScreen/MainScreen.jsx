@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
-import Lights from "../../components/Lights/Lights";
-import ColorSlider from "./../ColorSlider/ColorSlider";
+import Lights from "./../Lights/Lights";
 import Axios from "axios";
 import "./MainScreen.scss";
 
@@ -12,22 +11,8 @@ class MainScreen extends PureComponent {
     super(props);
     this.state = {
       lights: []
-      // togglePc: null,
-      // toggleTest: null,
-      // toggleBedLeft: null
     };
   }
-
-  // async componentDidMount(e) {
-  //   Axios.get(`${api_link}${username}/groups/1`).then(res => {
-  //     console.log(res);
-  //   });
-
-  //   this.setState({ toggleOn: this.state.toggleOn });
-  //   Axios.put(`${api_link}${username}/groups/1/state`, {
-  //     all_on: true
-  //   });
-  // }
 
   triggerPCHandler(e) {
     this.setState({ togglePc: !this.state.togglePc });
@@ -42,40 +27,11 @@ class MainScreen extends PureComponent {
       on: !this.state.toggleTest
     });
   }
-  triggerBedLeftHandler(e) {
-    this.setState({ toggleBedLeft: !this.state.toggleBedLeft });
-    Axios.put(`${api_link}${username}/lights/5/state`, {
-      on: !this.state.toggleBedLeft
-    });
-  }
-  triggerBedRightHandler(e) {
-    this.setState({ toggleBedRight: !this.state.toggleBedRight });
-    Axios.put(`${api_link}${username}/lights/9/state`, {
-      on: !this.state.toggleBedRight
-    });
-  }
 
   render() {
-    const {
-      triggerPCHandler,
-      triggerTestHandler,
-      triggerBedLeftHandler,
-      triggerBedRightHandler
-      // triggerTest2Handler
-    } = this;
-
     return (
       <div>
-        <Lights
-          className="primary-color"
-          triggerPC={triggerPCHandler.bind(this)}
-          triggerTest={triggerTestHandler.bind(this)}
-          triggerBedLeft={triggerBedLeftHandler.bind(this)}
-          triggerBedRight={triggerBedRightHandler.bind(this)}
-          // triggerTest2={triggerTest2Handler.bind(this)}
-        />
-
-        <ColorSlider />
+        <Lights />
 
         <h3>CHOOSE COLOR</h3>
       </div>
